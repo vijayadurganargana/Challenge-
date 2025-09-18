@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Care Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #f4f6f9;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background-color: #2f3542;
+      color: white;
+      padding: 20px 10px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      padding: 15px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #57606f;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .topbar {
+      background-color: white;
+      padding: 15px 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .topbar h1 {
+      font-size: 24px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 200px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #2f3542;
+    }
+
+    .card p {
+      font-size: 24px;
+      color: #1e90ff;
+    }
+
+    canvas {
+      margin-top: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main {
+        padding: 10px;
+      }
+      .topbar h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>HealthCare</h2>
+    <ul>
+      <li>Dashboard</li>
+      <li>Patients</li>
+      <li>Appointments</li>
+      <li>Reports</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="topbar">
+      <h1>Dashboard</h1>
+      <span>Welcome, Admin</span>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats">
+      <div class="card">
+        <h3>Total Patients</h3>
+        <p id="patientsCount">120</p>
+      </div>
+      <div class="card">
+        <h3>Today's Appointments</h3>
+        <p id="appointmentsCount">15</p>
+      </div>
+      <div class="card">
+        <h3>Avg Heart Rate</h3>
+        <p id="heartRate">76 bpm</p>
+      </div>
+      <div class="card">
+        <h3>Avg Blood Pressure</h3>
+        <p id="bloodPressure">120/80</p>
+      </div>
+    </div>
+
+    <!-- Chart Placeholder -->
+    <canvas id="healthChart" width="400" height="200"></canvas>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Sample Chart.js line chart
+    const ctx = document.getElementById('healthChart').getContext('2d');
+    const healthChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+        datasets: [{
+          label: 'Patient Visits',
+          data: [12, 19, 14, 20, 16],
+          borderColor: '#1e90ff',
+          backgroundColor: 'rgba(30,144,255,0.1)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Example: Update counts dynamically (simulate with JS)
+    document.getElementById('patientsCount').innerText = 125;
+    document.getElementById('appointmentsCount').innerText = 18;
+  </script>
+
+</body>
+</html>
